@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,7 @@ class UserController extends Controller
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
+        ActivityLog::log('user_created', "Usuario creado: {$user->name} ({$user->role})");
         return User::select('id', 'name', 'email', 'role', 'avatar_url', 'created_at')->find($user->id);
     }
 
@@ -40,11 +42,13 @@ class UserController extends Controller
         ]);
 
         $user->update($data);
+        ActivityLog::log('user_updated', "Usuario actualizado: {$user->name}");
         return User::select('id', 'name', 'email', 'role', 'avatar_url', 'created_at')->find($user->id);
     }
 
     public function destroy(User $user)
     {
+        ActivityLog::log('user_deleted', "Usuario eliminado: {$user->name}");
         $user->delete();
         return response()->json(['message' => 'Deleted']);
     }

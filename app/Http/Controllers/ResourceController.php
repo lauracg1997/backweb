@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Resource;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +27,9 @@ class ResourceController extends Controller
             'webinar_date' => 'nullable|date',
         ]);
 
-        return Resource::create($validated);
+        $resource = Resource::create($validated);
+        ActivityLog::log('resource_created', "Recurso creado: \"{$resource->name}\"");
+        return $resource;
     }
 
     public function update(Request $request, Resource $resource)
@@ -43,11 +46,13 @@ class ResourceController extends Controller
         ]);
 
         $resource->update($validated);
+        ActivityLog::log('resource_updated', "Recurso actualizado: \"{$resource->name}\"");
         return $resource;
     }
 
     public function destroy(Resource $resource)
     {
+        ActivityLog::log('resource_deleted', "Recurso eliminado: \"{$resource->name}\"");
         $resource->delete();
         return response()->json(['message' => 'Deleted']);
     }
