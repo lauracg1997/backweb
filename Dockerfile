@@ -1,13 +1,8 @@
 FROM php:8.3-cli-alpine
 
-RUN apk add --no-cache \
-    postgresql-dev \
-    zip unzip git \
-    libpng-dev libjpeg-turbo-dev freetype-dev \
-    oniguruma-dev libxml2-dev
+RUN apk add --no-cache postgresql-dev zip unzip git oniguruma-dev libxml2-dev
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_pgsql pdo_sqlite gd mbstring xml
+RUN docker-php-ext-install pdo pdo_pgsql mbstring xml
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
