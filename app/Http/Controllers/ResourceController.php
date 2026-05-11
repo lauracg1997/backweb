@@ -59,7 +59,7 @@ class ResourceController extends Controller
         ]);
 
         $file = $request->file('file');
-        $path = $file->store('resources', 'public');
+        $path = $file->store('resources', config('filesystems.default'));
         $bytes = $file->getSize();
 
         if ($bytes < 1024) {
@@ -71,7 +71,7 @@ class ResourceController extends Controller
         }
 
         return response()->json([
-            'url'  => '/storage/' . $path,
+            'url'  => Storage::url($path),
             'type' => strtolower($file->getClientOriginalExtension()),
             'size' => $size,
         ]);

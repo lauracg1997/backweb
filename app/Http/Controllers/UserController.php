@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -55,10 +56,10 @@ class UserController extends Controller
         ]);
 
         $file = $request->file('file');
-        $path = $file->store('avatars', 'public');
+        $path = $file->store('avatars', config('filesystems.default'));
 
         return response()->json([
-            'url' => '/storage/' . $path,
+            'url' => Storage::url($path),
         ]);
     }
 }
