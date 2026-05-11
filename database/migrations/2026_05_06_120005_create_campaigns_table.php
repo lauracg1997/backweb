@@ -11,8 +11,11 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('status', ['Activa', 'Borrador'])->default('Borrador');
+            $table->string('subject')->nullable();
+            $table->text('content')->nullable();
+            $table->enum('status', ['Activa', 'Borrador', 'Enviada'])->default('Borrador');
             $table->string('open_rate')->nullable()->default('0%');
+            $table->timestamp('sent_at')->nullable();
             $table->timestamps();
         });
     }
