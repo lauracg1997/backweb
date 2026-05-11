@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lead;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LeadController extends Controller
 {
@@ -26,6 +27,17 @@ class LeadController extends Controller
 
         $lead = Lead::create($validated);
         ActivityLog::log('lead_created', "Nuevo lead registrado: {$lead->name}");
+
+        try {
+            $html = view('emails.lead_confirmation', ['lead' => $lead])->render();
+            Mail::html($html, function ($message) use ($lead) {
+                $message->to($lead->email, $lead->name)
+                        ->subject('Hemos recibido tu solicitud - TalentionHR');
+            });
+        } catch (\Exception $e) {
+            // El lead se guarda aunque el email falle
+        }
+
         return $lead;
     }
 
