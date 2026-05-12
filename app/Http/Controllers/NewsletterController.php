@@ -58,7 +58,10 @@ class NewsletterController extends Controller
         }
 
         MailConfigService::applyFromSettings();
-        $logoUrl = config('app.frontend_url') . '/imagenes/Logo%20TalentionHR%20(2).png';
+        $logoPath = public_path('images/logo.png');
+        $logoBase64 = file_exists($logoPath)
+            ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+            : null;
         $sent = 0;
         $errors = 0;
 
@@ -68,7 +71,7 @@ class NewsletterController extends Controller
                     view('emails.campaign', [
                         'subject' => $newsletter->subject,
                         'content' => $newsletter->content,
-                        'logoUrl' => $logoUrl,
+                        'logoUrl' => $logoBase64,
                     ])->render(),
                     function ($message) use ($lead, $newsletter) {
                         $message->to($lead->email, $lead->name)
