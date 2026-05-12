@@ -35,7 +35,7 @@ class MailConfigService
 
         Config::set('mail.mailers.smtp.host', $account['smtpHost']);
         Config::set('mail.mailers.smtp.port', $port);
-        Config::set('mail.mailers.smtp.encryption', $encryption);
+        Config::set('mail.mailers.smtp.scheme', $encryption);
         Config::set('mail.mailers.smtp.username', $account['smtpUser']);
         Config::set('mail.mailers.smtp.password', $account['smtpPass']);
         Config::set('mail.from.address', $account['fromEmail'] ?? $account['smtpUser']);
