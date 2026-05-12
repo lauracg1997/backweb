@@ -58,10 +58,7 @@ class CampaignController extends Controller
         }
 
         MailConfigService::applyFromSettings();
-        $logoPath = public_path('images/logo.png');
-        $logoBase64 = file_exists($logoPath)
-            ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
-            : null;
+        $logoUrl = rtrim(config('app.url'), '/') . '/images/logo.png';
         $sent = 0;
         $errors = 0;
 
@@ -71,7 +68,7 @@ class CampaignController extends Controller
                     view('emails.campaign', [
                         'subject' => $campaign->subject,
                         'content' => $campaign->content,
-                        'logoUrl' => $logoBase64,
+                        'logoUrl' => $logoUrl,
                     ])->render(),
                     function ($message) use ($lead, $campaign) {
                         $message->to($lead->email, $lead->name)

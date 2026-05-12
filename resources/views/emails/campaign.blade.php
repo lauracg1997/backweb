@@ -16,7 +16,7 @@
           <tr>
             <td style="padding:0 0 24px 0;text-align:center;">
               @if($logoUrl)
-                <img src="{{ $logoUrl }}" alt="TalentionHR" style="height:52px;width:auto;display:inline-block;" />
+                <img src="{{ $logoUrl }}" alt="TalentionHR" style="height:160px;width:auto;max-width:320px;display:inline-block;" />
               @else
                 <span style="font-size:26px;font-weight:800;color:#1e293b;letter-spacing:-0.5px;">Talention<span style="color:#2563eb;">HR</span></span>
               @endif
