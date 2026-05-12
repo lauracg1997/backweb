@@ -50,7 +50,7 @@
                 <tr>
                   <td style="padding:32px 48px 40px;">
                     <div style="color:#334155;font-size:15px;line-height:1.8;">
-                      {!! nl2br(e($content)) !!}
+                      {!! $content !!}
                     </div>
                   </td>
                 </tr>
