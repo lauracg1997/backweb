@@ -58,7 +58,7 @@ class CampaignController extends Controller
         }
 
         MailConfigService::applyFromSettings();
-        $logoUrl = config('app.frontend_url') . '/imagenes/Logo TalentionHR (2).png';
+        $logoUrl = config('app.frontend_url') . '/imagenes/Logo%20TalentionHR%20(2).png';
         $sent = 0;
         $errors = 0;
 

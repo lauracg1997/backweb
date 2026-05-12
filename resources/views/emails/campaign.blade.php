@@ -5,68 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ $subject }}</title>
 </head>
-<body style="margin:0;padding:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;">
+<body style="margin:0;padding:0;background:#f0f4f8;font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
 
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:40px 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f4f8;padding:48px 16px;">
     <tr>
       <td align="center">
         <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
-          <!-- HEADER con logo -->
+          <!-- LOGO AREA -->
           <tr>
-            <td style="background:#ffffff;border-radius:16px 16px 0 0;padding:32px 40px;text-align:center;border-bottom:3px solid #2563eb;">
+            <td style="padding:0 0 24px 0;text-align:center;">
               @if($logoUrl)
-                <img src="{{ $logoUrl }}" alt="TalentionHR" style="height:48px;width:auto;display:block;margin:0 auto;" />
+                <img src="{{ $logoUrl }}" alt="TalentionHR" style="height:52px;width:auto;display:inline-block;" />
               @else
-                <span style="font-size:24px;font-weight:800;color:#1e2535;letter-spacing:-0.5px;">
-                  Talention<span style="color:#2563eb;">HR</span>
-                </span>
+                <span style="font-size:26px;font-weight:800;color:#1e293b;letter-spacing:-0.5px;">Talention<span style="color:#2563eb;">HR</span></span>
               @endif
             </td>
           </tr>
 
-          <!-- FRANJA AZUL con asunto -->
+          <!-- MAIN CARD -->
           <tr>
-            <td style="background:#2563eb;padding:24px 40px;">
-              <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;line-height:1.3;">
-                {{ $subject }}
-              </h1>
+            <td style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07);">
+
+              <!-- TOP ACCENT BAR -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 60%,#3b82f6 100%);height:6px;font-size:0;line-height:0;">&nbsp;</td>
+                </tr>
+              </table>
+
+              <!-- HEADER -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:40px 48px 32px;border-bottom:1px solid #f1f5f9;">
+                    <h1 style="margin:0;color:#0f172a;font-size:24px;font-weight:700;line-height:1.3;">
+                      {{ $subject }}
+                    </h1>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CONTENT -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:32px 48px 40px;">
+                    <div style="color:#334155;font-size:15px;line-height:1.8;">
+                      {!! nl2br(e($content)) !!}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA DIVIDER -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:0 48px 40px;">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background:#2563eb;border-radius:10px;padding:14px 32px;">
+                          <a href="{{ config('app.frontend_url') }}" style="color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;display:inline-block;">
+                            Visitar TalentionHR &rarr;
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- FOOTER INSIDE CARD -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background:#f8fafc;padding:24px 48px;border-top:1px solid #f1f5f9;">
+                    <p style="margin:0 0 4px;color:#64748b;font-size:13px;font-weight:600;">TalentionHR</p>
+                    <p style="margin:0;color:#94a3b8;font-size:12px;line-height:1.6;">
+                      Soluciones de talento para empresas modernas.<br/>
+                      Has recibido este email porque eres parte de nuestra red de contactos.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
             </td>
           </tr>
 
-          <!-- CONTENIDO -->
+          <!-- COPYRIGHT -->
           <tr>
-            <td style="background:#ffffff;padding:36px 40px;">
-              <div style="color:#374151;font-size:15px;line-height:1.7;">
-                {!! nl2br(e($content)) !!}
-              </div>
-            </td>
-          </tr>
-
-          <!-- SEPARADOR -->
-          <tr>
-            <td style="background:#ffffff;padding:0 40px;">
-              <hr style="border:none;border-top:1px solid #e2e8f0;margin:0;" />
-            </td>
-          </tr>
-
-          <!-- FOOTER -->
-          <tr>
-            <td style="background:#ffffff;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;">
-              <p style="margin:0 0 4px;color:#6b7280;font-size:13px;">
-                TalentionHR · Soluciones de talento para empresas modernas
-              </p>
-              <p style="margin:0;color:#9ca3af;font-size:12px;">
-                Has recibido este email porque eres parte de nuestra red de contactos.
-              </p>
-            </td>
-          </tr>
-
-          <!-- ESPACIO INFERIOR -->
-          <tr>
-            <td style="padding:24px;text-align:center;">
-              <p style="margin:0;color:#9ca3af;font-size:11px;">
-                © {{ date('Y') }} TalentionHR. Todos los derechos reservados.
+            <td style="padding:24px 0;text-align:center;">
+              <p style="margin:0;color:#94a3b8;font-size:11px;">
+                &copy; {{ date('Y') }} TalentionHR &middot; Todos los derechos reservados.
               </p>
             </td>
           </tr>
