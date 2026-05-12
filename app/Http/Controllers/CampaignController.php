@@ -77,6 +77,7 @@ class CampaignController extends Controller
                 );
                 $sent++;
             } catch (\Exception $e) {
+                \Log::error('Campaign send error: ' . $e->getMessage());
                 $errors++;
             }
         }
