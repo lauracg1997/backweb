@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ../talentionhr-cms
+    build: ../monorepo/cms
     ports:
       - "8081:80"
     volumes:
