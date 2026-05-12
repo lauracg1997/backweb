@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Newsletter;
 use App\Models\Lead;
 use App\Models\ActivityLog;
+use App\Services\MailConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -56,6 +57,7 @@ class NewsletterController extends Controller
             return response()->json(['message' => 'No hay suscriptores con email a quién enviar.'], 422);
         }
 
+        MailConfigService::applyFromSettings();
         $logoUrl = config('app.frontend_url') . '/imagenes/Logo TalentionHR (2).png';
         $sent = 0;
         $errors = 0;
@@ -75,6 +77,7 @@ class NewsletterController extends Controller
                 );
                 $sent++;
             } catch (\Exception $e) {
+                \Log::error('Newsletter send error: ' . $e->getMessage());
                 $errors++;
             }
         }

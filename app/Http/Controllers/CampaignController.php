@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Campaign;
 use App\Models\Lead;
 use App\Models\ActivityLog;
+use App\Services\MailConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -56,6 +57,7 @@ class CampaignController extends Controller
             return response()->json(['message' => 'No hay leads con email a quién enviar.'], 422);
         }
 
+        MailConfigService::applyFromSettings();
         $logoUrl = config('app.frontend_url') . '/imagenes/Logo TalentionHR (2).png';
         $sent = 0;
         $errors = 0;

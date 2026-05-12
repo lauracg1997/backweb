@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lead;
 use App\Models\ActivityLog;
+use App\Services\MailConfigService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -29,6 +30,7 @@ class LeadController extends Controller
         ActivityLog::log('lead_created', "Nuevo lead registrado: {$lead->name}");
 
         try {
+            MailConfigService::applyFromSettings();
             $html = view('emails.lead_confirmation', ['lead' => $lead])->render();
             Mail::html($html, function ($message) use ($lead) {
                 $message->to($lead->email, $lead->name)

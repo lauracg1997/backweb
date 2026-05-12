@@ -40,3 +40,4 @@ Route::post('newsletters/{newsletter}/send', [NewsletterController::class, 'send
 Route::apiResource('form-submissions', FormSubmissionController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('settings', [SettingsController::class, 'index']);
 Route::post('settings', [SettingsController::class, 'store']);
+Route::post('settings/test-smtp', [SettingsController::class, 'testSmtp']);
